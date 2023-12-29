@@ -1,0 +1,36 @@
+version: '3'
+services:
+    opnform:
+        container_name: opnform_app
+        image: jhumanj/opnform
+        restart: always
+        environment:
+         - TZ=Europe/Madrid
+        volumes:
+            - ./my-opnform-data:/persist
+            - .env:/app/.env
+        networks:
+         - reverseproxy
+        
+
+    redis:
+        container_name: opnform_redis
+        image: redis:latest
+        restart: always
+        command: ["redis-server", "--appendonly", "yes"]
+        environment:
+         - TZ=Europe/Madrid
+        volumes:
+            - ./opnform-redis:/data
+        networks:
+         - reverseproxy
+
+#volumes:
+#  opnform-data:
+#   external: true
+#  opnform-redis:
+#   external: true
+
+networks:
+  reverseproxy:
+   external: true
