@@ -7,7 +7,7 @@ services:
         environment:
          - TZ=Europe/Madrid
         volumes:
-            - ./my-opnform-data:/persist
+            - opnform-data:/persist
             - .env:/app/.env
         networks:
          - reverseproxy
@@ -25,9 +25,9 @@ services:
         networks:
          - reverseproxy
 
-#volumes:
-#  opnform-data:
-#   external: true
+volumes:
+  opnform-data:
+   external: true
 #  opnform-redis:
 #   external: true
 
